@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+    <head>
+        <title> Jigrassi Studios </title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+        $(document).ready(function() {
+            $('#saveButton').click(function() {
+                alert('helloworld');
+                var inputValue = document.getElementById('inputField').value;
+                // for some reason newlines don't get carried over
+                var lineFixedInput = inputValue.replace(/\n/g, "\r\n");
+                var blob = new Blob([lineFixedInput]);
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = document.getElementById('filename').value;
+                link.click();
+            });
+        })
+        </script>
+
+        <style>
+        div {
+            margin: 10px;
+        }
+        </style>
+
+    </head>
+
+    <body>
+        <form>
+            <div class='row'>
+                File name: <input type="text" id="filename" value="hello.py"/>
+                <button id="saveButton" type="button"> Save </button>
+            </div>
+            <br>
+            <div class='row'>
+                <textarea id="inputField" cols="80" rows="50"></textarea>
+            </div>
+        </form>
+    </body>
+</html>
